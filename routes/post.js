@@ -5,6 +5,7 @@ import {
     getPost,
     updatePost,
 } from "../controllers/post.js";
+import { verifyUser } from "../untils/verifyToken.js";
 const router = express.Router();
 
 // Create a new post
@@ -17,6 +18,6 @@ router.get("/:id", getPost);
 router.get("/", getAllPost);
 
 // Update a post
-router.put("/:id", updatePost);
+router.put("/:id", verifyUser, updatePost);
 
 export default router;

@@ -34,9 +34,13 @@ export const getAllPost = async (req, res, next) => {
 // Updated Post
 export const updatePost = async (req, res, next) => {
     try {
-        const post = await Post.findById(req.params.id);
-        const updated = await post.updateOne({ $set: req.body });
-        res.status(200).json("Post has been updated successfully", updated);
+        const post = await Post.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body },
+            { new: true }
+        );
+        // const updated = await post.updateOne({ $set: req.body });
+        res.status(200).json("Post has been updated successfully", post);
     } catch (error) {
         next(error);
     }
